@@ -1,0 +1,19 @@
+@import url("https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@100..900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    overflow-y: scroll;
+}
+
+.custom-first-letter::first-letter {
+    font-size: 44px;
+    font-weight: 500;
+    float: left;
+    margin: 5px;
+}
+/* .custom-first-line::first-line {
+    font-weight: bold;
+} */
