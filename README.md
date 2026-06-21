@@ -22,7 +22,7 @@ A full-stack blogging platform built by **Team DevTrix** — allowing users to r
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── client/          # React frontend
