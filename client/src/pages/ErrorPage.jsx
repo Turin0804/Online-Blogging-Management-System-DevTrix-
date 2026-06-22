@@ -1,67 +1,120 @@
 import { useNavigate } from "react-router-dom";
-import Button from "../components/common/Button";
+import { useEffect, useState } from "react";
 
 const ErrorPage = () => {
     const navigate = useNavigate();
+    const [dots, setDots] = useState(".");
+
+    // Animated dots for "searching..."
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setDots((prev) => (prev.length >= 3 ? "." : prev + "."));
+        }, 500);
+        return () => clearInterval(interval);
+    }, []);
 
     return (
-        <section className="bg-white ">
-            <div className="container flex items-center min-h-screen px-6 py-12 mx-auto">
-                <div className="flex flex-col items-center max-w-sm mx-auto text-center">
-                    <p className="p-3 text-sm font-medium text-indigo-600 rounded-full bg-blue-50 ">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            strokeWidth="2"
-                            stroke="currentColor"
-                            className="w-6 h-6"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z"
-                            />
-                        </svg>
-                    </p>
-                    <h1 className="mt-3 text-2xl font-semibold text-gray-800  md:text-3xl">
-                        Something Went Wrong!
+        <div className="min-h-screen bg-gray-50 flex flex-col items-center justify-center px-4 overflow-hidden relative">
+
+            {/* Background floating blobs */}
+            <div className="absolute top-10 left-10 w-64 h-64 bg-orange-100 rounded-full opacity-40 animate-pulse" />
+            <div
+                className="absolute bottom-16 right-16 w-48 h-48 bg-orange-200 rounded-full opacity-30"
+                style={{ animation: "pulse 3s ease-in-out infinite 1s" }}
+            />
+            <div
+                className="absolute top-1/2 left-4 w-24 h-24 bg-orange-100 rounded-full opacity-50"
+                style={{ animation: "pulse 4s ease-in-out infinite 0.5s" }}
+            />
+
+            {/* Torn newspaper effect */}
+            <div className="relative z-10 text-center max-w-lg w-full">
+
+                {/* Brand */}
+                <p className="font-rye text-2xl font-bold text-orange-600 mb-6 tracking-wide">
+                    Openpage
+                </p>
+
+                {/* Newspaper card */}
+                <div
+                    className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 md:p-12 relative overflow-hidden"
+                    style={{ animation: "fadeSlideUp 0.6s ease-out both" }}
+                >
+                    {/* Decorative top rule */}
+                    <div className="flex items-center gap-2 mb-6">
+                        <div className="h-px flex-1 bg-gray-200" />
+                        <span className="text-xs text-gray-400 font-semibold uppercase tracking-widest">
+                            Breaking News
+                        </span>
+                        <div className="h-px flex-1 bg-gray-200" />
+                    </div>
+
+                    {/* Giant 404 */}
+                    <div
+                        className="text-[120px] md:text-[160px] font-extrabold leading-none select-none"
+                        style={{
+                            background: "linear-gradient(135deg, #6366f1, #a855f7)",
+                            WebkitBackgroundClip: "text",
+                            WebkitTextFillColor: "transparent",
+                            animation: "floatY 3s ease-in-out infinite",
+                        }}
+                    >
+                        404
+                    </div>
+
+                    {/* Headline */}
+                    <h1 className="font-rye text-2xl md:text-3xl font-bold text-gray-800 mt-2 mb-3 leading-snug">
+                        Article Not Found
                     </h1>
-                    <p className="mt-4 text-gray-500 ">
-                        Here are some helpful links:
+
+                    {/* Subtext */}
+                    <p className="text-gray-500 text-sm md:text-base mb-2">
+                        Our reporters searched every corner of the web
+                        {dots}
+                    </p>
+                    <p className="text-gray-400 text-sm mb-8">
+                        The page you're looking for has been moved, deleted, or never existed.
                     </p>
 
-                    <div className="flex items-center w-full mt-6 gap-x-3 shrink-0 sm:w-auto">
+                    {/* Divider */}
+                    <div className="border-t border-dashed border-gray-200 mb-8" />
+
+                    {/* Actions */}
+                    <div className="flex flex-col sm:flex-row gap-3 justify-center">
                         <button
                             onClick={() => navigate(-1)}
-                            className="flex items-center justify-center w-1/2 px-5 py-1 text-sm text-gray-700 transition-colors duration-200 bg-white border rounded-lg gap-x-2 sm:w-auto   hover:bg-gray-100 "
+                            className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl border border-gray-200 text-gray-600 font-semibold text-sm hover:bg-gray-50 hover:border-orange-300 transition-all duration-200"
                         >
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="w-5 h-5 rtl:rotate-180 text-indigo-600"
-                            >
-                                <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    d="M6.75 15.75L3 12m0 0l3.75-3.75M3 12h18"
-                                />
-                            </svg>
-
-                            <span>Go back</span>
+                            ← Go Back
                         </button>
-
-                        <Button
-                            label={"Take Me Home"}
+                        <button
                             onClick={() => navigate("/")}
-                        />
+                            className="flex items-center justify-center gap-2 px-6 py-2.5 rounded-xl bg-orange-600 text-white font-semibold text-sm hover:bg-orange-700 shadow-md hover:shadow-orange-200 hover:shadow-lg transition-all duration-200"
+                            style={{ animation: "fadeSlideUp 0.8s ease-out both" }}
+                        >
+                            Back to Home
+                        </button>
                     </div>
                 </div>
+
+                {/* Footer hint */}
+                <p className="text-gray-400 text-xs mt-6">
+                    Error code: <span className="font-mono text-orange-400">PAGE_NOT_FOUND</span>
+                </p>
             </div>
-        </section>
+
+            {/* Keyframe styles */}
+            <style>{`
+                @keyframes fadeSlideUp {
+                    from { opacity: 0; transform: translateY(30px); }
+                    to   { opacity: 1; transform: translateY(0); }
+                }
+                @keyframes floatY {
+                    0%, 100% { transform: translateY(0px); }
+                    50%      { transform: translateY(-12px); }
+                }
+            `}</style>
+        </div>
     );
 };
 

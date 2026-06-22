@@ -7,10 +7,11 @@ export default {
         extend: {
             colors: {
                 accent: "#F8F1E7 ",
+                primary: "#E7700D",
             },
 
             fontFamily: {
-                grenze: ["Grenze Gotisch", "serif"],
+                rye: ["Rye", "serif"],
             },
         },
     },

@@ -1,14 +1,13 @@
 import { Helmet } from "react-helmet-async";
-import { Navigate } from "react-router-dom";
-import AdminStatistics from "../../components/AdminStatistics";
-import LoadingSpinner from "../../components/common/LoadingSpinner";
-import useRole from "../../hooks/useRole";
+// TODO: import { Navigate } from "react-router-dom";
+// TODO: import AdminStatistics from "../../components/AdminStatistics";
+// TODO: import LoadingSpinner from "../../components/common/LoadingSpinner";
+// TODO: import useRole from "../../hooks/useRole";
 
 const Statistics = () => {
-    const [role, isLoading] = useRole();
-
-    if (role == "user") return <Navigate to="/" />;
-    if (isLoading) return <LoadingSpinner />;
+    // TODO: const [role, isLoading] = useRole();
+    // if (role == "user") return <Navigate to="/" />;
+    // if (isLoading) return <LoadingSpinner />;
 
     return (
         <div>
@@ -16,7 +15,8 @@ const Statistics = () => {
                 <title>Dashboard</title>
             </Helmet>
 
-            {role === "admin" && <AdminStatistics />}
+            {/* TODO: {role === "admin" && <AdminStatistics />} */}
+            <p>Dashboard Statistics - coming soon</p>
         </div>
     );
 };
